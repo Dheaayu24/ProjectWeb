@@ -7,11 +7,6 @@
  * ============================================================================
  */
 
-require_once __DIR__ . '/config/database.php';
-require_once __DIR__ . '/app/models/Queue.php';
-require_once __DIR__ . '/app/models/Restaurant.php';
-require_once __DIR__ . '/app/models/Announcement.php';
-require_once __DIR__ . '/app/helpers/Auth.php';
 
 Auth::start();
 
