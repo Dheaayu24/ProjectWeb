@@ -1,0 +1,19 @@
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE & Editor folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Environment variables & Sensitive data
+.env
+.env.local
+
+# Server & PHP error logs
+*.log
+error_log
+
