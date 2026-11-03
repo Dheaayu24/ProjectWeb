@@ -30,6 +30,7 @@ include __DIR__ . '/../layouts/header.php';
       <?php endif; ?>
 
       <form method="POST" action="index.php?url=auth/login">
+        <?= Csrf::field() ?>
         <div class="form-group">
           <label class="form-label">Email</label>
           <input type="email" name="email" class="form-control" placeholder="nama@email.com" required value="<?= htmlspecialchars($_POST['email'] ?? 'budi@gmail.com') ?>">

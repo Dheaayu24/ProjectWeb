@@ -23,6 +23,7 @@ include __DIR__ . '/../layouts/header.php';
       <?php endif; ?>
 
       <form method="POST" action="index.php?url=auth/register">
+        <?= Csrf::field() ?>
         <div class="form-group">
           <label class="form-label">Nama Lengkap</label>
           <input type="text" name="name" class="form-control" placeholder="Nama Anda" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
