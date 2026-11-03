@@ -1,4 +1,7 @@
-
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
 
 # IDE & Editor folders
 .vscode/
