@@ -1,4 +1,4 @@
-# 🍩 Mochi Mood Bakery – Smart Queue Management System
+# 🍩  Mood Bakery – Smart Queue Management System
 
 Aplikasi Web Sistem Manajemen Antrean Restoran & Bakery berbasis **PHP Native** dan **MySQL / SQLite Auto-Fallback**, diimplementasikan dengan presisi tinggi mengikuti desain resmi **Mochi Mood Bakery UI Collection**.
 
