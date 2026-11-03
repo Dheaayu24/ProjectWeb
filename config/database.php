@@ -117,6 +117,27 @@ class Database
                 `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 
+            // Buat tabel menu_items jika belum ada
+            $pdo->exec("CREATE TABLE IF NOT EXISTS `menu_items` (
+                `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                `restaurant_id` INT UNSIGNED NOT NULL DEFAULT 1,
+                `name` VARCHAR(150) NOT NULL,
+                `description` TEXT NULL,
+                `price` INT UNSIGNED NOT NULL DEFAULT 0,
+                `image_url` VARCHAR(255) NULL,
+                `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+            // Seed menu_items jika kosong
+            $checkMenu = $pdo->query("SELECT COUNT(*) FROM `menu_items`")->fetchColumn();
+            if ($checkMenu == 0) {
+                $pdo->exec("INSERT INTO `menu_items` (`restaurant_id`, `name`, `description`, `price`, `image_url`) VALUES
+                    (1, 'Signature Matcha Cloud', 'Matcha Uji asli Jepang dengan krim susu segar melimpah dan taburan bubuk matcha.', 28000, 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80'),
+                    (1, 'Belgian Choco Glaze', 'Cokelat hitam Belgia pekat dengan lelehan cokelat hangat dan roasted almond.', 30000, 'https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=400&q=80'),
+                    (1, 'Wild Berry Cream', 'Krim buah beri segar dipadukan dengan selai strawberry murni asam manis.', 29000, 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80'),
+                    (1, 'Lotus Biscoff Crunch', 'Krim karamel kental dengan remahan biskuit Lotus Biscoff renyah khas Belgia.', 32000, 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80')");
+            }
+
             // Pastikan Mochi Mood Central ada
             $checkResto = $pdo->query("SELECT id FROM restaurants WHERE id = 1")->fetch();
             if ($checkResto) {

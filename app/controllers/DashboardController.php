@@ -96,11 +96,16 @@ class DashboardController extends BaseController
         $queues = $this->queueModel->getByRestaurant($restaurantId);
         $summary = $this->queueModel->getDashboardCounts($restaurantId);
 
-        // Ambil daftar menu dari database
-        $db = Database::getConnection();
-        $stmt = $db->prepare("SELECT * FROM menu_items WHERE restaurant_id = :id ORDER BY id DESC");
-        $stmt->execute([':id' => $restaurantId]);
-        $donuts = $stmt->fetchAll();
+        // Ambil daftar menu dari database (dengan fallback)
+        $donuts = [];
+        try {
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT * FROM menu_items WHERE restaurant_id = :id ORDER BY id DESC");
+            $stmt->execute([':id' => $restaurantId]);
+            $donuts = $stmt->fetchAll();
+        } catch (Throwable $t) {
+            $donuts = [];
+        }
 
         // Hitung rincian status antrean (selesai dan dibatalkan)
         $completed = 0;

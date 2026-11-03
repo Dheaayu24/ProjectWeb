@@ -50,11 +50,22 @@ class HomeController extends BaseController
         // 2. Ambil seluruh daftar restoran yang sedang buka/tersedia beserta jumlah antrean
         $restaurants = $this->restaurantModel->getWithWaitingCount();
 
-        // 3. Ambil menu unggulan restoran (Prepared Statement)
-        $db = Database::getConnection();
-        $stmt = $db->prepare("SELECT * FROM menu_items WHERE restaurant_id = :resto_id ORDER BY id ASC");
-        $stmt->execute([':resto_id' => $restaurant['id']]);
-        $featuredDonuts = $stmt->fetchAll();
+        // 3. Ambil menu unggulan restoran (Prepared Statement dengan Try-Catch Fallback)
+        $featuredDonuts = [];
+        try {
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT * FROM menu_items WHERE restaurant_id = :resto_id ORDER BY id ASC");
+            $stmt->execute([':resto_id' => $restaurant['id']]);
+            $featuredDonuts = $stmt->fetchAll();
+        } catch (Throwable $t) {
+            // Fallback anggun jika tabel menu_items belum tersedia di database
+            $featuredDonuts = [
+                ['id' => 1, 'name' => 'Signature Matcha Cloud', 'description' => 'Matcha Uji asli Jepang dengan isian krim lumer.', 'price' => 28000, 'image_url' => 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80'],
+                ['id' => 2, 'name' => 'Belgian Choco Glaze', 'description' => 'Cokelat Belgia pekat dengan lelehan hangat.', 'price' => 30000, 'image_url' => 'https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=400&q=80'],
+                ['id' => 3, 'name' => 'Wild Berry Cream', 'description' => 'Krim buah beri segar asam manis.', 'price' => 29000, 'image_url' => 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80'],
+                ['id' => 4, 'name' => 'Lotus Biscoff Crunch', 'description' => 'Krim karamel dengan remahan biskuit renyah.', 'price' => 32000, 'image_url' => 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80'],
+            ];
+        }
 
         // 4. Ambil pengumuman aktif jika ada
         $activeAnnouncement = $this->announcementModel->getActive();
