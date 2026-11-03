@@ -35,6 +35,7 @@ $isOpen = ($restaurant['status'] ?? 'open') === 'open';
       <?php endif; ?>
 
       <form method="POST" action="index.php?url=queues/create">
+        <?= Csrf::field() ?>
         <!-- Pilihan Dine-In atau Takeaway -->
         <label class="form-label" style="margin-bottom: 10px;">Pilihan Kunjungan</label>
         <input type="hidden" name="type" id="visit_type_input" value="dine_in">
