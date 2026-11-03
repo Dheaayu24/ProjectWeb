@@ -9,10 +9,13 @@ $cleanUri = rtrim($uri, '.');
 // If static file exists in workspace, serve it directly
 $file = __DIR__ . $cleanUri;
 if (!empty($cleanUri) && $cleanUri !== '/' && is_file($file)) {
-    $ext = pathinfo($file, PATHINFO_EXTENSION);
+    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
     if ($ext !== 'php') {
         return false; // Built-in server serves css, js, images, etc.
     }
+    // Direct PHP file execution (e.g. showcase.php, check_db.php)
+    require $file;
+    return true;
 }
 
 // Check public/ directory for static files as well

@@ -332,13 +332,12 @@ class Queue
     {
         $targetDate = $date ?? date('Y-m-d');
 
+        // Ambil SEMUA nomor antrean untuk tanggal dan restoran hari ini
         $sql = "
             SELECT queue_number 
             FROM {$this->table} 
             WHERE restaurant_id = :restaurant_id 
-              AND queue_date = :queue_date 
-            ORDER BY id DESC 
-            LIMIT 1
+              AND queue_date = :queue_date
         ";
 
         $stmt = $this->db->prepare($sql);
@@ -347,20 +346,33 @@ class Queue
             ':queue_date'    => $targetDate,
         ]);
 
-        $lastQueue = $stmt->fetch();
+        $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-        if (!$lastQueue || empty($lastQueue['queue_number'])) {
-            return sprintf('%s%03d', $prefix, 21); // Mulai dari A021 agar selaras dengan mockup
+        $existingNumbers = [];
+        $maxSequence = 20; // Default awal: jika belum ada antrean hari ini, mulai dari A021
+
+        foreach ($rows as $num) {
+            $numClean = strtoupper(trim((string)$num));
+            $existingNumbers[$numClean] = true;
+
+            // Ekstrak angka urutan dari nomor (misal 'A025' -> 25, 'A-025' -> 25)
+            if (preg_match('/(\d+)$/', $numClean, $matches)) {
+                $seqVal = (int)$matches[1];
+                if ($seqVal > $maxSequence) {
+                    $maxSequence = $seqVal;
+                }
+            }
         }
 
-        $lastNumberStr = $lastQueue['queue_number'];
-        if (preg_match('/(\d+)$/', $lastNumberStr, $matches)) {
-            $nextSequence = (int)$matches[1] + 1;
-        } else {
-            $nextSequence = 21;
+        // Cari nomor berikutnya yang dijamin 100% belum pernah terpakai
+        $candidateSeq = $maxSequence + 1;
+        while (true) {
+            $candidateStr = sprintf('%s%03d', $prefix, $candidateSeq);
+            if (!isset($existingNumbers[$candidateStr])) {
+                return $candidateStr;
+            }
+            $candidateSeq++;
         }
-
-        return sprintf('%s%03d', $prefix, $nextSequence);
     }
 
     public function create(array $data): int
@@ -396,18 +408,38 @@ class Queue
                     (:user_id, :restaurant_id, :queue_number, :people_count, :type, :customer_name, :customer_phone, :status, :queue_date, NOW(), NOW())
             ";
 
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':user_id'        => $userId,
-                ':restaurant_id'  => $restaurantId,
-                ':queue_number'   => $queueNumber,
-                ':people_count'   => $peopleCount,
-                ':type'           => $type,
-                ':customer_name'  => $customerName,
-                ':customer_phone' => $customerPhone,
-                ':status'         => $status,
-                ':queue_date'     => $queueDate,
-            ]);
+            $maxRetries = 5;
+            $retryCount = 0;
+
+            while ($retryCount < $maxRetries) {
+                try {
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->execute([
+                        ':user_id'        => $userId,
+                        ':restaurant_id'  => $restaurantId,
+                        ':queue_number'   => $queueNumber,
+                        ':people_count'   => $peopleCount,
+                        ':type'           => $type,
+                        ':customer_name'  => $customerName,
+                        ':customer_phone' => $customerPhone,
+                        ':status'         => $status,
+                        ':queue_date'     => $queueDate,
+                    ]);
+                    break;
+                } catch (PDOException $pe) {
+                    // Deteksi jika terjadi duplicate key constraint (1062 / 23000)
+                    if ($pe->getCode() == 23000 || str_contains($pe->getMessage(), '23000') || str_contains($pe->getMessage(), '1062') || str_contains($pe->getMessage(), 'Duplicate')) {
+                        $retryCount++;
+                        // Dapatkan nomor urut baru dan coba lagi secara otomatis
+                        $queueNumber = $this->generateQueueNumber($restaurantId, $queueDate);
+                        if ($retryCount >= $maxRetries) {
+                            throw $pe;
+                        }
+                    } else {
+                        throw $pe;
+                    }
+                }
+            }
 
             $newQueueId = (int)$this->db->lastInsertId();
 

@@ -141,7 +141,7 @@ include __DIR__ . '/includes/header.php';
 
         <!-- Bottom visual donuts -->
         <div class="mobile-bottom-decor" style="margin-top: 24px;">
-          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80" alt="Mochi Donuts">
+          <img src="images/donuts/hero-platter.jpg" alt="Mochi Donuts">
         </div>
       </div>
     </div>

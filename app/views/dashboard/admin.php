@@ -137,8 +137,8 @@ $isOpen = ($restaurant['status'] ?? 'open') === 'open';
           <input type="text" name="donut_desc" class="form-control" placeholder="Donut bulat empuk dengan isian lumer..." required>
         </div>
         <div class="form-group">
-          <label class="form-label">URL Foto Donut</label>
-          <input type="url" name="donut_image" class="form-control" placeholder="https://..." value="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=500&q=80">
+          <label class="form-label">URL / Path Foto Donut</label>
+          <input type="text" name="donut_image" class="form-control" placeholder="images/donuts/matcha-crunch.jpg atau URL..." value="images/donuts/matcha-crunch.jpg">
         </div>
         <div style="display: flex; gap: 8px;">
           <button type="submit" class="btn btn-primary btn-sm">Simpan Donut</button>

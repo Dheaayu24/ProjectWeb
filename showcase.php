@@ -71,7 +71,7 @@ include __DIR__ . '/includes/header.php';
             <a href="queue.php" class="btn-mochi btn-mochi-sm" style="font-size: 10px; padding: 5px 12px;">Join Waiting List →</a>
           </div>
           <div style="flex: 0.8; height: 110px; border-radius: 50%; overflow: hidden; background: #EAE3D4;">
-            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="images/donuts/hero-platter.jpg" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
         </div>
 
@@ -95,19 +95,19 @@ include __DIR__ . '/includes/header.php';
           </div>
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center;">
             <div style="background: #FFF; padding: 6px; border-radius: 10px; font-size: 9px; font-weight: 600;">
-              <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=100&q=80" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-bottom: 4px;">
+              <img src="images/donuts/matcha-crunch.jpg" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-bottom: 4px;">
               <div>Matcha</div>
             </div>
             <div style="background: #FFF; padding: 6px; border-radius: 10px; font-size: 9px; font-weight: 600;">
-              <img src="https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=100&q=80" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-bottom: 4px;">
+              <img src="images/donuts/choco-bliss.jpg" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-bottom: 4px;">
               <div>Choco</div>
             </div>
             <div style="background: #FFF; padding: 6px; border-radius: 10px; font-size: 9px; font-weight: 600;">
-              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=100&q=80" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-bottom: 4px;">
+              <img src="images/donuts/strawberry-cloud.jpg" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-bottom: 4px;">
               <div>Berry</div>
             </div>
             <div style="background: #FFF; padding: 6px; border-radius: 10px; font-size: 9px; font-weight: 600;">
-              <img src="https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=100&q=80" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-bottom: 4px;">
+              <img src="images/donuts/lotus-dream.jpg" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-bottom: 4px;">
               <div>Lotus</div>
             </div>
           </div>
@@ -121,7 +121,7 @@ include __DIR__ . '/includes/header.php';
             <div>⚡ Fast & Easy Queue</div>
             <div>🧁 Freshly Made Daily</div>
           </div>
-          <img src="https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=150&q=80" style="width: 60px; height: 60px; border-radius: 10px; object-fit: cover;">
+          <img src="images/donuts/choco-bliss.jpg" style="width: 60px; height: 60px; border-radius: 10px; object-fit: cover;">
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@ include __DIR__ . '/includes/header.php';
                 Don't have an account? <span style="font-weight: 700; color: var(--brand-green);">Register here</span>
               </div>
               <div class="mobile-bottom-decor" style="margin-top: 10px;">
-                <img src="https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=150&q=80" style="width: 75px; height: 75px;">
+                <img src="images/donuts/choco-bliss.jpg" style="width: 75px; height: 75px;">
               </div>
             </div>
           </div>
@@ -206,7 +206,7 @@ include __DIR__ . '/includes/header.php';
                 <div style="font-size: 10px; color: var(--text-muted); margin-top: 6px;">Back to Home</div>
               </div>
               <div class="mobile-bottom-decor" style="margin-top: 6px;">
-                <img src="https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=150&q=80" style="width: 75px; height: 75px;">
+                <img src="images/donuts/lotus-dream.jpg" style="width: 75px; height: 75px;">
               </div>
             </div>
           </div>
