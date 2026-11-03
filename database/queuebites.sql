@@ -102,6 +102,20 @@ CREATE TABLE `announcements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
+-- TABEL 6: menu_items (Filled Round Donuts)
+-- ============================================================================
+CREATE TABLE `menu_items` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `restaurant_id` INT UNSIGNED NOT NULL DEFAULT 1,
+    `name` VARCHAR(150) NOT NULL,
+    `description` TEXT NOT NULL,
+    `price` INT UNSIGNED NOT NULL DEFAULT 0,
+    `image_url` VARCHAR(255) NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT `fk_menu_items_restaurant` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================================
 -- SEED DATA
 -- ============================================================================
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`, `role`, `created_at`) VALUES
@@ -136,3 +150,11 @@ INSERT INTO `queue_history` (`id`, `queue_id`, `old_status`, `new_status`, `chan
 
 INSERT INTO `announcements` (`id`, `title`, `message`, `is_active`, `created_at`) VALUES
 (1, 'Promo Grand Opening', 'Nikmati diskon 20% untuk paket Mochi Mood Delight khusus hari ini! Pesan antrean Anda sekarang.', 1, NOW());
+
+INSERT INTO `menu_items` (`id`, `restaurant_id`, `name`, `description`, `price`, `image_url`, `created_at`) VALUES
+(1, 1, 'Matcha Crunch', 'Donut bulat empuk tanpa lubang dengan lelehan krim Uji Matcha murni, dilapisi glaze matcha harum dan taburan renyah crushed pistachios & cookie crumbs.', 18000, 'images/donuts/matcha-crunch.jpg', NOW()),
+(2, 1, 'Choco Bliss', 'Donut bulat empuk berisikan dark chocolate ganache Belgia lumer, dilapisi glaze cokelat mengkilap dan taburan crispy chocolate pearls & cocoa nibs.', 18000, 'images/donuts/choco-bliss.jpg', NOW()),
+(3, 1, 'Strawberry Cloud', 'Donut bulat lembut berisikan custard vanila lembut, dibalut pastel pink strawberry cream glaze dan taburan freeze-dried strawberry crumbles renyah.', 20000, 'images/donuts/strawberry-cloud.jpg', NOW()),
+(4, 1, 'Lotus Dream', 'Donut bulat dengan lelehan selai Lotus Biscoff speculoos karamel hangat, topping biscoff cream dan remahan biskuit renyah.', 20000, 'images/donuts/lotus-dream.jpg', NOW()),
+(5, 1, 'Vanilla Bean Diplomat', 'Donut bomboloni bulat klasik ditaburi gula halus salju, dengan isian melimpah krim custard diplomat vanila Madagaskar asli.', 16000, 'images/donuts/vanilla-diplomat.jpg', NOW()),
+(6, 1, 'Tiramisu Mascarpone', 'Donut bulat dengan isian krim mascarpone Italia dan espresso artisan, ditaburi bubuk cocoa pekat dan hiasan cokelat biji kopi.', 22000, 'images/donuts/tiramisu-mascarpone.jpg', NOW());

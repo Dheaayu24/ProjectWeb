@@ -36,8 +36,8 @@ include __DIR__ . '/../layouts/header.php';
 
       <div style="display: flex; justify-content: center;">
         <div class="hero-image-card">
-          <!-- Filled Round Donut (Chewy's Dessert Style: Bulat Penuh Tanpa Lubang) -->
-          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80" alt="Freshly Baked Filled Round Donut Mochi Mood">
+          <!-- Filled Round Donut Platter (Chewy's Dessert Style: Bulat Penuh Tanpa Lubang) -->
+          <img src="images/donuts/hero-platter.jpg" alt="Freshly Baked Filled Round Donuts Mochi Mood">
           <div class="hero-float-pill">
             <span>🍩</span>
             <span>Freshly Baked Every Morning</span>
@@ -59,7 +59,7 @@ include __DIR__ . '/../layouts/header.php';
 
     <div class="menu-grid">
       <?php if (!empty($featuredDonuts)): ?>
-        <?php foreach (array_slice($featuredDonuts, 0, 3) as $d): ?>
+        <?php foreach (array_slice($featuredDonuts, 0, 4) as $d): ?>
           <div class="donut-card">
             <div class="donut-thumb">
               <img src="<?= htmlspecialchars($d['image_url']) ?>" alt="<?= htmlspecialchars($d['name']) ?>">

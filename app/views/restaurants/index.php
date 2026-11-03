@@ -33,13 +33,13 @@ include __DIR__ . '/../layouts/header.php';
           <div class="resto-thumb">
             <?php
               $images = [
-                1 => 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80',
-                2 => 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=600&q=80',
-                3 => 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80',
-                4 => 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80',
-                5 => 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
+                1 => 'images/donuts/hero-platter.jpg',
+                2 => 'images/donuts/matcha-crunch.jpg',
+                3 => 'images/donuts/choco-bliss.jpg',
+                4 => 'images/donuts/strawberry-cloud.jpg',
+                5 => 'images/donuts/lotus-dream.jpg',
               ];
-              $thumb = $images[$r['id']] ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80';
+              $thumb = $images[$r['id']] ?? 'images/donuts/hero-platter.jpg';
             ?>
             <img src="<?= $thumb ?>" alt="<?= htmlspecialchars($r['name']) ?>">
             <div class="resto-status-badge">
